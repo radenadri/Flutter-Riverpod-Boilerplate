@@ -1,15 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_counter_app/models/number_trivia_model.dart';
-import 'package:riverpod_counter_app/riverpod/providers/number_trivia_provider.dart';
+import 'package:riverpod_counter_app/riverpod/notifiers/number_trivia_notifier.dart';
 
-class NumberTriviaView extends ConsumerWidget {
+class NumberTriviaView extends ConsumerStatefulWidget {
   const NumberTriviaView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _NumberTriviaViewState();
+}
+
+class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
+  late TextEditingController inputNumberController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    inputNumberController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    inputNumberController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final AsyncValue<NumberTriviaModel> numberTrivia =
-        ref.watch(getRandomNumberTriviaProvider);
+        ref.watch(numberTriviaProvider);
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -42,9 +63,35 @@ class NumberTriviaView extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20.0),
+            CupertinoTextField(
+              controller: inputNumberController,
+              keyboardType: TextInputType.number,
+              clearButtonMode: OverlayVisibilityMode.editing,
+              // border
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: CupertinoColors.inactiveGray,
+                    width: 0.0,
+                  ),
+                ),
+              ),
+              placeholder: 'Enter a number',
+            ),
+            const SizedBox(height: 20.0),
             CupertinoButton.filled(
               onPressed: () {
-                ref.invalidate(getRandomNumberTriviaProvider);
+                ref.read(numberTriviaProvider.notifier).getConcreteNumberTrivia(
+                      int.parse(inputNumberController.text),
+                    );
+                inputNumberController.clear();
+              },
+              child: const Text('Get concrete number'),
+            ),
+            const SizedBox(height: 20.0),
+            CupertinoButton.filled(
+              onPressed: () {
+                ref.invalidate(numberTriviaProvider);
               },
               child: const Text('Get random number'),
             ),
