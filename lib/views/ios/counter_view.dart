@@ -29,19 +29,6 @@ class CounterView extends ConsumerWidget {
               onPressed: () => ref.read(counterProvider.notifier).decrement(),
               child: const Icon(CupertinoIcons.minus),
             ),
-            const SizedBox(height: 20.0),
-            // button to navigate to number trivia view
-            CupertinoButton.filled(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const NumberTriviaView(),
-                  ),
-                );
-              },
-              child: const Text('Number Trivia View'),
-            ),
           ],
         ),
       ),

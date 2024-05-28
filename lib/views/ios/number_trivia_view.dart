@@ -9,7 +9,7 @@ class NumberTriviaView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<NumberTriviaModel> numberTrivia =
-        ref.watch(getNumberTriviaProvider);
+        ref.watch(getRandomNumberTriviaProvider);
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -44,7 +44,7 @@ class NumberTriviaView extends ConsumerWidget {
             const SizedBox(height: 20.0),
             CupertinoButton.filled(
               onPressed: () {
-                ref.invalidate(getNumberTriviaProvider);
+                ref.invalidate(getRandomNumberTriviaProvider);
               },
               child: const Text('Get random number'),
             ),

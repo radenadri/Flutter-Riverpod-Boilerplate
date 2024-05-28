@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_counter_app/riverpod/providers/counter_provider.dart';
-import 'package:riverpod_counter_app/views/android/number_trivia_view.dart';
 
 class CounterView extends ConsumerWidget {
   const CounterView({super.key});
@@ -28,19 +27,6 @@ class CounterView extends ConsumerWidget {
             ElevatedButton(
               onPressed: () => ref.read(counterProvider.notifier).decrement(),
               child: const Icon(Icons.remove),
-            ),
-            const SizedBox(height: 20.0),
-            // button to navigate to number trivia view
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NumberTriviaView(),
-                  ),
-                );
-              },
-              child: const Text('Number Trivia View'),
             ),
           ],
         ),
