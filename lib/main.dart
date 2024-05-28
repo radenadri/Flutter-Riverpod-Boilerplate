@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_counter_app/views/android/counter_view.dart'
-    as android;
+import 'package:riverpod_counter_app/views/android/home_view.dart' as android;
 import 'package:riverpod_counter_app/views/ios/home_view.dart' as ios;
 
 void main() {
@@ -26,7 +25,7 @@ void main() {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.black54),
             useMaterial3: true,
           ),
-          home: const android.CounterView(),
+          home: const android.HomeView(),
         ),
       ),
     );
