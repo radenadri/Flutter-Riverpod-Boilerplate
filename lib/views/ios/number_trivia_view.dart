@@ -55,8 +55,20 @@ class NumberTriviaView extends ConsumerWidget {
   }
 
   Widget errorWidget(Object error) {
+    Map<String, dynamic> errorMap = error as Map<String, dynamic>;
+
     return Center(
-      child: Text('Something when wrong : ${error.toString()}'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            errorMap['statusCode'].toString(),
+            style: const TextStyle(fontSize: 50),
+          ),
+          const SizedBox(height: 20.0),
+          Text(errorMap['message']),
+        ],
+      ),
     );
   }
 
