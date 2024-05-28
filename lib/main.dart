@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,13 +11,23 @@ void main() {
   if (defaultTargetPlatform == TargetPlatform.iOS) {
     runApp(
       const ProviderScope(
-        child: ios.CounterView(),
+        child: CupertinoApp(
+          theme: CupertinoThemeData(brightness: Brightness.light),
+          home: ios.CounterView(),
+        ),
       ),
     );
   } else if (defaultTargetPlatform == TargetPlatform.android) {
     runApp(
-      const ProviderScope(
-        child: android.CounterView(),
+      ProviderScope(
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const android.CounterView(),
+        ),
       ),
     );
   }
