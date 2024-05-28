@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_counter_app/models/number_trivia_model.dart';
 import 'package:riverpod_counter_app/riverpod/providers/number_trivia_provider.dart';
@@ -11,11 +11,11 @@ class NumberTriviaView extends ConsumerWidget {
     final AsyncValue<NumberTriviaModel> numberTrivia =
         ref.watch(getNumberTriviaProvider);
 
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Number Trivia App'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Number Trivia App'),
       ),
-      child: numberTrivia.when(
+      body: numberTrivia.when(
         skipLoadingOnRefresh: false,
         data: (numberTrivia) => successWidget(numberTrivia, ref),
         error: (error, stackTrace) => errorWidget(error),
@@ -42,7 +42,7 @@ class NumberTriviaView extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20.0),
-            CupertinoButton.filled(
+            ElevatedButton(
               onPressed: () {
                 ref.invalidate(getNumberTriviaProvider);
               },
@@ -77,7 +77,7 @@ class NumberTriviaView extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CupertinoActivityIndicator(),
+          CircularProgressIndicator(),
           SizedBox(height: 10),
           Text('Loading'),
         ],

@@ -8,22 +8,29 @@ part 'number_trivia_provider.g.dart';
 
 @riverpod
 Future<NumberTriviaModel> getNumberTrivia(GetNumberTriviaRef ref) async {
-  final response = await http.get(
-    Uri.parse('http://numbersapi.com/random'),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  );
+  try {
+    final response = await http.get(
+      Uri.parse('http://numbersapi.com/random'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
 
-  if (response.statusCode != 200) {
+    if (response.statusCode != 200) {
+      return Future.error({
+        'success': false,
+        'statusCode': response.statusCode,
+        'message': 'Something when wrong, please try again',
+      });
+    }
+
+    final numberTrivia = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return NumberTriviaModel.fromJson(numberTrivia);
+  } catch (e) {
     return Future.error({
       'success': false,
-      'statusCode': response.statusCode,
-      'message': 'Something when wrong, please try again',
+      'message': e.toString(),
     });
   }
-
-  final numberTrivia = jsonDecode(response.body) as Map<String, dynamic>;
-
-  return NumberTriviaModel.fromJson(numberTrivia);
 }
