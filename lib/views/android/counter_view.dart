@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_counter_app/providers/counter_provider.dart';
+import 'package:riverpod_counter_app/models/counter_model.dart';
 
-class CounterView extends ConsumerStatefulWidget {
+class CounterView extends ConsumerWidget {
   const CounterView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CounterViewState();
-}
-
-class _CounterViewState extends ConsumerState<CounterView> {
-  @override
-  Widget build(BuildContext context) {
-    final counterRepo = ref.read(counterProvider.notifier);
-    final counterState = ref.watch(counterProvider);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -34,7 +26,7 @@ class _CounterViewState extends ConsumerState<CounterView> {
                 'You have pushed the button this many times:',
               ),
               Text(
-                counterState.counter.toString(),
+                '${ref.watch(counterProvider)}',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ],
@@ -42,11 +34,11 @@ class _CounterViewState extends ConsumerState<CounterView> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            counterRepo.increment();
+            ref.read(counterProvider.notifier).increment();
           },
           tooltip: 'Increment',
           child: const Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
       ),
     );
   }

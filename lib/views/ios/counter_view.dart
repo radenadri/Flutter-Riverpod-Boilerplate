@@ -1,20 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_counter_app/providers/counter_provider.dart';
+import 'package:riverpod_counter_app/models/counter_model.dart';
 
-class CounterView extends ConsumerStatefulWidget {
+class CounterView extends ConsumerWidget {
   const CounterView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CounterViewState();
-}
-
-class _CounterViewState extends ConsumerState<CounterView> {
-  @override
-  Widget build(BuildContext context) {
-    final counterRepo = ref.read(counterProvider.notifier);
-    final counterState = ref.watch(counterProvider);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return CupertinoApp(
       theme: const CupertinoThemeData(brightness: Brightness.light),
       home: CupertinoPageScaffold(
@@ -28,12 +20,17 @@ class _CounterViewState extends ConsumerState<CounterView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'You have pressed the button ${counterState.counter.toString()} times.',
+                'You have pressed the button ${ref.watch(counterProvider)} times.',
               ),
               const SizedBox(height: 20.0),
               CupertinoButton.filled(
-                onPressed: () => setState(() => counterRepo.increment()),
+                onPressed: () => ref.read(counterProvider.notifier).increment(),
                 child: const Icon(CupertinoIcons.add),
+              ),
+              const SizedBox(height: 20.0),
+              CupertinoButton.filled(
+                onPressed: () => ref.read(counterProvider.notifier).decrement(),
+                child: const Icon(CupertinoIcons.minus),
               ),
             ],
           ),

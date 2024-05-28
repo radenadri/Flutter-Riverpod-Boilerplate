@@ -1,14 +1,13 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'counter_model.freezed.dart';
 part 'counter_model.g.dart';
 
-@freezed
-class CounterModel with _$CounterModel {
-  factory CounterModel({
-    @Default(0) int counter,
-  }) = _CounterModel;
+@riverpod
+class Counter extends _$Counter {
+  @override
+  int build() => 0;
 
-  factory CounterModel.fromJson(Map<String, dynamic> json) =>
-      _$CounterModelFromJson(json);
+  void increment() => state++;
+
+  void decrement() => state--;
 }
