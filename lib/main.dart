@@ -12,6 +12,7 @@ void main() {
     runApp(
       const ProviderScope(
         child: CupertinoApp(
+          title: 'Flutter + Riverpod Boilerplate',
           theme: CupertinoThemeData(brightness: Brightness.light),
           home: ios.CounterView(),
         ),
@@ -21,9 +22,9 @@ void main() {
     runApp(
       ProviderScope(
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Flutter + Riverpod Boilerplate',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.black54),
             useMaterial3: true,
           ),
           home: const android.CounterView(),
