@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_counter_app/config/constants.dart';
@@ -42,10 +43,12 @@ class NumberTrivia extends _$NumberTrivia {
     return _getRandomNumberTrivia();
   }
 
-  Future<NumberTriviaModel> getConcreteNumberTrivia(
+  Future<void> getConcreteNumberTrivia(
     int number,
   ) async {
     try {
+      state = const AsyncLoading();
+
       final response = await http.get(
         Uri.parse('$API_URL/$number'),
         headers: {
@@ -63,7 +66,7 @@ class NumberTrivia extends _$NumberTrivia {
 
       final numberTrivia = jsonDecode(response.body) as Map<String, dynamic>;
 
-      return NumberTriviaModel.fromJson(numberTrivia);
+      state = AsyncData(NumberTriviaModel.fromJson(numberTrivia));
     } catch (e) {
       return Future.error({
         'success': false,

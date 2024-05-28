@@ -81,10 +81,34 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
             const SizedBox(height: 20.0),
             CupertinoButton.filled(
               onPressed: () {
-                ref.read(numberTriviaProvider.notifier).getConcreteNumberTrivia(
+                if (inputNumberController.text.isEmpty) {
+                  showCupertinoDialog(
+                    context: context,
+                    builder: (context) => CupertinoAlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('Please enter a number'),
+                      actions: [
+                        CupertinoButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                  return;
+                }
+
+                ref
+                    .read(numberTriviaProvider.notifier)
+                    .getConcreteNumberTrivia(
                       int.parse(inputNumberController.text),
-                    );
-                inputNumberController.clear();
+                    )
+                    .then((value) {
+                  inputNumberController.clear();
+                  FocusScope.of(context).unfocus();
+                });
               },
               child: const Text('Get concrete number'),
             ),
