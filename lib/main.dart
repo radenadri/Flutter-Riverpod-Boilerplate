@@ -22,7 +22,7 @@ void main() {
         child: MaterialApp(
           title: 'Flutter + Riverpod Boilerplate',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.black54),
+            colorSchemeSeed: Colors.green,
             useMaterial3: true,
           ),
           home: const android.HomeView(),
