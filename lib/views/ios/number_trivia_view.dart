@@ -33,16 +33,17 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
         ref.watch(numberTriviaProvider);
 
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Number Trivia App'),
-      ),
-      child: numberTrivia.when(
-        skipLoadingOnRefresh: false,
-        data: (numberTrivia) => successWidget(numberTrivia, ref),
-        error: (error, stackTrace) => errorWidget(error),
-        loading: () => loadingWidget(),
-      ),
-    );
+        navigationBar: const CupertinoNavigationBar(
+          middle: Text('Number Trivia App'),
+        ),
+        child: SingleChildScrollView(
+          child: numberTrivia.when(
+            skipLoadingOnRefresh: false,
+            data: (numberTrivia) => successWidget(numberTrivia, ref),
+            error: (error, stackTrace) => errorWidget(error),
+            loading: () => loadingWidget(),
+          ),
+        ));
   }
 
   Widget successWidget(NumberTriviaModel numberTrivia, WidgetRef ref) {

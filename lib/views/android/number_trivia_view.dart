@@ -36,11 +36,13 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
       appBar: AppBar(
         title: const Text('Number Trivia App'),
       ),
-      body: numberTrivia.when(
-        skipLoadingOnRefresh: false,
-        data: (numberTrivia) => successWidget(numberTrivia, ref),
-        error: (error, stackTrace) => errorWidget(error),
-        loading: () => loadingWidget(),
+      body: SingleChildScrollView(
+        child: numberTrivia.when(
+          skipLoadingOnRefresh: false,
+          data: (numberTrivia) => successWidget(numberTrivia, ref),
+          error: (error, stackTrace) => errorWidget(error),
+          loading: () => loadingWidget(),
+        ),
       ),
     );
   }
