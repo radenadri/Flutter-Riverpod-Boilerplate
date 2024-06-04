@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_counter_app/config/di.dart';
 import 'package:riverpod_counter_app/riverpod/counter_provider.dart';
 
 class CounterView extends ConsumerWidget {
@@ -7,6 +8,14 @@ class CounterView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final prefs = ref.read(sharedPrefs.future);
+
+    ref.listen(counterProvider, (previous, next) {
+      prefs.then((value) {
+        value.setInt('counter', next);
+      });
+    });
+
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text('Counter App'),

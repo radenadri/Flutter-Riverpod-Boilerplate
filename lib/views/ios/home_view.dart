@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_counter_app/views/ios/counter_view.dart';
-import 'package:riverpod_counter_app/views/ios/number_trivia_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
