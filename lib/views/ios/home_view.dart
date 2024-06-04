@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:riverpod_counter_app/views/ios/counter_view.dart';
 import 'package:riverpod_counter_app/views/ios/number_trivia_view.dart';
 
@@ -17,24 +18,14 @@ class HomeView extends StatelessWidget {
           children: [
             CupertinoButton.filled(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const CounterView(),
-                  ),
-                );
+                GoRouter.of(context).pushNamed('counter');
               },
               child: const Text('Counter'),
             ),
             const SizedBox(height: 20.0),
             CupertinoButton.filled(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const NumberTriviaView(),
-                  ),
-                );
+                GoRouter.of(context).pushNamed('number_trivia');
               },
               child: const Text('Number Trivia'),
             ),

@@ -9,5 +9,11 @@ class Counter extends _$Counter {
 
   void increment() => state++;
 
-  void decrement() => state--;
+  void decrement() {
+    if (state > 0) {
+      state--;
+    } else {
+      state = 0;
+    }
+  }
 }

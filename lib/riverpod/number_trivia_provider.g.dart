@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'number_trivia_notifier.dart';
+part of 'number_trivia_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$numberTriviaHash() => r'13ed9994d427f2ee0bef5ee40f731f71a607813a';
+String _$numberTriviaHash() => r'b0aadb9e7629963228a7ba6730d5439f8d217db3';
 
 /// See also [NumberTrivia].
 @ProviderFor(NumberTrivia)

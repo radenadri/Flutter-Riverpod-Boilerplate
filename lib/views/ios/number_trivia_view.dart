@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_counter_app/models/number_trivia_model.dart';
-import 'package:riverpod_counter_app/riverpod/notifiers/number_trivia_notifier.dart';
+import 'package:riverpod_counter_app/riverpod/number_trivia_provider.dart';
 
 class NumberTriviaView extends ConsumerStatefulWidget {
   const NumberTriviaView({super.key});

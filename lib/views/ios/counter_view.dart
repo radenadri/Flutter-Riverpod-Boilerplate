@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_counter_app/riverpod/providers/counter_provider.dart';
+import 'package:riverpod_counter_app/riverpod/counter_provider.dart';
 
 class CounterView extends ConsumerWidget {
   const CounterView({super.key});

@@ -5,7 +5,7 @@ import 'package:riverpod_counter_app/config/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_counter_app/models/number_trivia_model.dart';
 
-part 'number_trivia_notifier.g.dart';
+part 'number_trivia_provider.g.dart';
 
 @riverpod
 class NumberTrivia extends _$NumberTrivia {
