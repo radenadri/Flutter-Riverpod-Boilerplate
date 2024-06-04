@@ -9,7 +9,19 @@ part 'number_trivia_provider.g.dart';
 
 @riverpod
 class NumberTrivia extends _$NumberTrivia {
-  Future<NumberTriviaModel> _getRandomNumberTrivia() async {
+  @override
+  FutureOr<NumberTriviaModel> build() {
+    return NumberTriviaModel.fromJson({
+      'number': -1,
+      'text': '',
+      'type': '',
+      'found': false,
+    });
+  }
+
+  Future<void> getRandomNumberTrivia() async {
+    state = const AsyncLoading();
+
     try {
       final response = await http.get(
         Uri.parse('$API_URL/random'),
@@ -28,18 +40,13 @@ class NumberTrivia extends _$NumberTrivia {
 
       final numberTrivia = jsonDecode(response.body) as Map<String, dynamic>;
 
-      return NumberTriviaModel.fromJson(numberTrivia);
+      state = AsyncData(NumberTriviaModel.fromJson(numberTrivia));
     } catch (e) {
       return Future.error({
         'success': false,
         'message': e.toString(),
       });
     }
-  }
-
-  @override
-  FutureOr<NumberTriviaModel> build() {
-    return _getRandomNumberTrivia();
   }
 
   Future<void> getConcreteNumberTrivia(

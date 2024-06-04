@@ -56,10 +56,19 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              numberTrivia.number.toString(),
-              style: const TextStyle(fontSize: 50),
-            ),
+            Builder(builder: (context) {
+              if (numberTrivia.number == -1) {
+                return const Text(
+                  'Please enter a number',
+                  style: TextStyle(fontSize: 28),
+                );
+              }
+
+              return Text(
+                numberTrivia.number.toString(),
+                style: const TextStyle(fontSize: 50),
+              );
+            }),
             const SizedBox(height: 20.0),
             Text(
               numberTrivia.text,
@@ -70,7 +79,6 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
             TextField(
               controller: inputNumberController,
               keyboardType: TextInputType.number,
-              // hint
               decoration: const InputDecoration(
                 hintText: 'Enter a number',
                 border: OutlineInputBorder(),
@@ -113,7 +121,7 @@ class _NumberTriviaViewState extends ConsumerState<NumberTriviaView> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                ref.invalidate(numberTriviaProvider);
+                ref.read(numberTriviaProvider.notifier).getRandomNumberTrivia();
               },
               child: const Text('Get random number'),
             ),

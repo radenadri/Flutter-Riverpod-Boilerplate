@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_counter_app/views/android/counter_view.dart';
-import 'package:riverpod_counter_app/views/android/number_trivia_view.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -17,24 +16,14 @@ class HomeView extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CounterView(),
-                  ),
-                );
+                GoRouter.of(context).pushNamed('counter');
               },
               child: const Text('Counter'),
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NumberTriviaView(),
-                  ),
-                );
+                GoRouter.of(context).pushNamed('number_trivia');
               },
               child: const Text('Number Trivia'),
             ),
