@@ -31,14 +31,17 @@ final iosRouter = GoRouter(
 final androidRouter = GoRouter(
   routes: [
     GoRoute(
+      name: 'home',
       path: '/',
       builder: (context, state) => const android.HomeView(),
     ),
     GoRoute(
+      name: 'counter',
       path: '/counter',
       builder: (context, state) => const android.CounterView(),
     ),
     GoRoute(
+      name: 'number_trivia',
       path: '/number_trivia',
       builder: (context, state) => const android.NumberTriviaView(),
     ),
