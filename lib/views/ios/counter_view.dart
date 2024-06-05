@@ -8,7 +8,7 @@ class CounterView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final prefs = ref.read(sharedPrefs.future);
+    final prefs = ref.watch(sharedPrefs.future);
 
     ref.listen(counterProvider, (previous, next) {
       prefs.then((value) {

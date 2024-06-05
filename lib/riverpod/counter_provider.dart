@@ -9,12 +9,13 @@ part 'counter_provider.g.dart';
 class Counter extends _$Counter {
   @override
   int build() {
-    final prefs = ref.read(sharedPrefs.future);
+    final prefs = ref.watch(sharedPrefs.future);
+
     prefs.then((value) {
       state = value.getInt('counter') ?? 0;
     });
 
-    return state;
+    return 0;
   }
 
   void increment() => state++;
