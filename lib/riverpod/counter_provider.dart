@@ -11,9 +11,7 @@ class Counter extends _$Counter {
   int build() {
     final prefs = ref.watch(sharedPrefs.future);
 
-    prefs.then((value) {
-      state = value.getInt('counter') ?? 0;
-    });
+    prefs.then((value) => state = value.getInt('counter') ?? 0);
 
     return 0;
   }

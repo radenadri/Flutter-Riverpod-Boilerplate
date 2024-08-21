@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_counter_app/config/constants.dart';
@@ -23,12 +24,14 @@ class NumberTrivia extends _$NumberTrivia {
     state = const AsyncLoading();
 
     try {
-      final response = await http.get(
-        Uri.parse('$API_URL/random'),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
+      final response = await Isolate.run(() async {
+        await http.get(
+          Uri.parse('$API_URL/random'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        );
+      });
 
       if (response.statusCode != 200) {
         return Future.error({
@@ -55,12 +58,14 @@ class NumberTrivia extends _$NumberTrivia {
     try {
       state = const AsyncLoading();
 
-      final response = await http.get(
-        Uri.parse('$API_URL/$number'),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
+      final response = await Isolate.run(() async {
+        await http.get(
+          Uri.parse('$API_URL/$number'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        );
+      });
 
       if (response.statusCode != 200) {
         return Future.error({
