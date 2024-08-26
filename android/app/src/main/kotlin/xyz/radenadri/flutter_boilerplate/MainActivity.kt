@@ -1,4 +1,4 @@
-package com.example.riverpod_counter_app
+package xyz.radenadri.flutter_boilerplate
 
 import io.flutter.embedding.android.FlutterActivity
 
