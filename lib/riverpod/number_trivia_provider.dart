@@ -25,7 +25,7 @@ class NumberTrivia extends _$NumberTrivia {
 
     try {
       final response = await Isolate.run(() async {
-        await http.get(
+        return await http.get(
           Uri.parse('$API_URL/random'),
           headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ class NumberTrivia extends _$NumberTrivia {
       state = const AsyncLoading();
 
       final response = await Isolate.run(() async {
-        await http.get(
+        return await http.get(
           Uri.parse('$API_URL/$number'),
           headers: {
             'Content-Type': 'application/json',

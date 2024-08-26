@@ -6,7 +6,7 @@ part of 'number_trivia_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$numberTriviaHash() => r'3f2edc318cfc6ae71b85bd752fe57f613bdb4d3b';
+String _$numberTriviaHash() => r'f49c915be0158440d3ddf8c78d743c832edf9b6f';
 
 /// See also [NumberTrivia].
 @ProviderFor(NumberTrivia)
